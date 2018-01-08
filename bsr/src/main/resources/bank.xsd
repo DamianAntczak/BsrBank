@@ -1,0 +1,50 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bsr="http://bsr.poznan.put.cs/ws"
+           targetNamespace="http://bsr.poznan.put.cs/ws" elementFormDefault="qualified">
+
+    <!--getAccounts-->
+
+    <xs:element name="getAccountsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="client_id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAccountsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="accounts" type="bsr:account" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--getAccount-->
+
+    <xs:element name="getAccountRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="account_nbr" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAccountResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="account" type="bsr:account"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--COMPLEX TYPES-->
+
+    <xs:complexType name="account">
+        <xs:sequence>
+            <xs:element name="nbr" type="xs:string"/>
+            <xs:element name="amount" type="xs:int"/>
+            <xs:element name="client_id" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

@@ -23,18 +23,18 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
 
-    @Bean(name = "accounts")
+    @Bean(name = "bank")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema countriesSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("AccountsPort");
+        wsdl11Definition.setPortTypeName("BankPort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://bsr.poznan.put.cs");
+        wsdl11Definition.setTargetNamespace("http://bsr.poznan.put.cs/ws");
         wsdl11Definition.setSchema(countriesSchema);
         return wsdl11Definition;
     }
 
     @Bean
     public XsdSchema countriesSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("accounts.xsd"));
+        return new SimpleXsdSchema(new ClassPathResource("bank.xsd"));
     }
 }
