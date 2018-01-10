@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="account_nbr" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="client_id" type="{http://bsr.poznan.put.cs/ws}payment"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "accountNbr"
+    "clientId"
 })
-@XmlRootElement(name = "getAccountRequest")
-public class GetAccountRequest {
+@XmlRootElement(name = "getPaymentRequest")
+public class GetPaymentRequest {
 
-    @XmlElement(name = "account_nbr", required = true)
-    protected String accountNbr;
+    @XmlElement(name = "client_id", required = true)
+    protected Payment clientId;
 
     /**
-     * Gets the value of the accountNbr property.
+     * Gets the value of the clientId property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Payment }
      *     
      */
-    public String getAccountNbr() {
-        return accountNbr;
+    public Payment getClientId() {
+        return clientId;
     }
 
     /**
-     * Sets the value of the accountNbr property.
+     * Sets the value of the clientId property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Payment }
      *     
      */
-    public void setAccountNbr(String value) {
-        this.accountNbr = value;
+    public void setClientId(Payment value) {
+        this.clientId = value;
     }
 
 }

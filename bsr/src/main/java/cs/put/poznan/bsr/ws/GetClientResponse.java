@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import cs.put.poznan.bsr.model.Client;
 
 
 /**
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="account_nbr" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="client" type="{http://bsr.poznan.put.cs/model}client"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +37,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "accountNbr"
+    "client"
 })
-@XmlRootElement(name = "getAccountRequest")
-public class GetAccountRequest {
+@XmlRootElement(name = "getClientResponse")
+public class GetClientResponse {
 
-    @XmlElement(name = "account_nbr", required = true)
-    protected String accountNbr;
+    @XmlElement(required = true)
+    protected Client client;
 
     /**
-     * Gets the value of the accountNbr property.
+     * Gets the value of the client property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Client }
      *     
      */
-    public String getAccountNbr() {
-        return accountNbr;
+    public Client getClient() {
+        return client;
     }
 
     /**
-     * Sets the value of the accountNbr property.
+     * Sets the value of the client property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Client }
      *     
      */
-    public void setAccountNbr(String value) {
-        this.accountNbr = value;
+    public void setClient(Client value) {
+        this.client = value;
     }
 
 }

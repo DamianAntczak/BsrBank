@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="account_nbr" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "accountNbr"
+    "message"
 })
-@XmlRootElement(name = "getAccountRequest")
-public class GetAccountRequest {
+@XmlRootElement(name = "getPaymentResponse")
+public class GetPaymentResponse {
 
-    @XmlElement(name = "account_nbr", required = true)
-    protected String accountNbr;
+    @XmlElement(required = true)
+    protected String message;
 
     /**
-     * Gets the value of the accountNbr property.
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getAccountNbr() {
-        return accountNbr;
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * Sets the value of the accountNbr property.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAccountNbr(String value) {
-        this.accountNbr = value;
+    public void setMessage(String value) {
+        this.message = value;
     }
 
 }

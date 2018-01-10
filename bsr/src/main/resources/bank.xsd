@@ -1,5 +1,9 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bsr="http://bsr.poznan.put.cs/ws"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:bsr="http://bsr.poznan.put.cs/ws"
+           xmlns:model="http://bsr.poznan.put.cs/model"
            targetNamespace="http://bsr.poznan.put.cs/ws" elementFormDefault="qualified">
+
+    <xs:import namespace="http://bsr.poznan.put.cs/model" schemaLocation="client.xsd"/>
 
     <!--getAccounts-->
 
@@ -37,14 +41,85 @@
         </xs:complexType>
     </xs:element>
 
+    <!--PAYMENT-->
+    <xs:element name="getPaymentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="client_id" type="bsr:payment"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPaymentResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="message" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--PAYMENT-->
+    <xs:element name="addPaymentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="payment" type="bsr:payment"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addPaymentResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="massage" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getClientRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="client_id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getClientResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="client" type="model:client"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <!--COMPLEX TYPES-->
 
     <xs:complexType name="account">
         <xs:sequence>
             <xs:element name="nbr" type="xs:string"/>
-            <xs:element name="amount" type="xs:int"/>
+            <xs:element name="amount" type="xs:double"/>
             <xs:element name="client_id" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
+
+
+    <xs:complexType name="transaction">
+        <xs:sequence>
+            <xs:element name="amount" type="xs:double"/>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="source_name" type="xs:string"/>
+            <xs:element name="source_account" type="xs:string"/>
+            <xs:element name="destination_name" type="xs:string"/>
+            <xs:element name="destination_account" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="payment">
+        <xs:sequence>
+            <xs:element name="nbr" type="xs:string"/>
+            <xs:element name="amount" type="xs:double"/>
+            <xs:element name="title" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
 
 </xs:schema>

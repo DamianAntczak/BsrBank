@@ -15,18 +15,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for account complex type.
+ * <p>Java class for payment complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="account">
+ * &lt;complexType name="payment">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="nbr" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="client_id" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,18 +36,18 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "account", propOrder = {
+@XmlType(name = "payment", propOrder = {
     "nbr",
     "amount",
-    "clientId"
+    "title"
 })
-public class Account {
+public class Payment {
 
     @XmlElement(required = true)
     protected String nbr;
     protected double amount;
-    @XmlElement(name = "client_id", required = true)
-    protected String clientId;
+    @XmlElement(required = true)
+    protected String title;
 
     /**
      * Gets the value of the nbr property.
@@ -90,27 +90,27 @@ public class Account {
     }
 
     /**
-     * Gets the value of the clientId property.
+     * Gets the value of the title property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getClientId() {
-        return clientId;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * Sets the value of the clientId property.
+     * Sets the value of the title property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setClientId(String value) {
-        this.clientId = value;
+    public void setTitle(String value) {
+        this.title = value;
     }
 
 }

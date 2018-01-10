@@ -5,5 +5,5 @@
 // Generated on: 2018.01.10 at 12:25:44 AM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://bsr.poznan.put.cs/ws", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package cs.put.poznan.bsr.ws;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://bsr.poznan.put.cs/model")
+package cs.put.poznan.bsr.model;
