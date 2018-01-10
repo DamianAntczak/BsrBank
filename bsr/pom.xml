@@ -65,6 +65,11 @@
             <groupId>wsdl4j</groupId>
             <artifactId>wsdl4j</artifactId>
         </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -89,6 +94,7 @@
                     <schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
                     <schemaFiles>bank.xsd</schemaFiles>
                     <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                    <packageName>cs.put.poznan.bsr.ws</packageName>
                     <clearOutputDir>false</clearOutputDir>
                 </configuration>
             </plugin>

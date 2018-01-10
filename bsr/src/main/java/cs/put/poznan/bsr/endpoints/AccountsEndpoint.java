@@ -2,7 +2,7 @@ package cs.put.poznan.bsr.endpoints;
 
 
 
-import cs.put.poznan.bsr.*;
+import cs.put.poznan.bsr.model.Account;
 import cs.put.poznan.bsr.model.Client;
 import cs.put.poznan.bsr.repository.AccountRepository;
 import cs.put.poznan.bsr.repository.ClientRepository;
@@ -13,6 +13,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -42,7 +43,7 @@ public class AccountsEndpoint {
     @ResponsePayload
     public GetAccountResponse getAccount(@RequestPayload GetAccountRequest request){
 
-        Account accountByNrb = accountRepository.findAccountByNbr(request.getAccountNbr());
+        Account accountByNrb = accountRepository.findAccountByNrb(request.getAccountNbr());
 
         GetAccountResponse getAccountResponse = new GetAccountResponse();
         getAccountResponse.setAccount(accountByNrb);
@@ -56,10 +57,10 @@ public class AccountsEndpoint {
 
         Payment payment = addPaymentRequest.getPayment();
         
-        Account accountByNbr = accountRepository.findAccountByNbr(payment.getNbr());
+        Account accountByNbr = accountRepository.findAccountByNrb(payment.getNrb());
         
         if(payment.getAmount() > 0){
-            double amount = accountByNbr.getAmount() - payment.getAmount();
+            BigDecimal amount = accountByNbr.getAmount().subtract(BigDecimal.valueOf(payment.getAmount()));
             accountByNbr.setAmount(amount);
             accountRepository.save(accountByNbr);
         }

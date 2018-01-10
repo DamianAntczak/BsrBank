@@ -1,6 +1,6 @@
 package cs.put.poznan.bsr.controller;
 
-import cs.put.poznan.bsr.ws.Account;
+import cs.put.poznan.bsr.model.Account;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;

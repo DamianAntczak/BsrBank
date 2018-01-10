@@ -36,7 +36,9 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 
     @Bean
     public XsdSchemaCollection schemaCollection() {
-        CommonsXsdSchemaCollection xsds = new CommonsXsdSchemaCollection(new ClassPathResource("client.xsd"), new ClassPathResource("bank.xsd"));
+        CommonsXsdSchemaCollection xsds = new CommonsXsdSchemaCollection(
+                new ClassPathResource("account.xsd"),
+                new ClassPathResource("bank.xsd"));
         xsds.setInline(true);
         return xsds;
     }

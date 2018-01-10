@@ -3,7 +3,7 @@
            xmlns:model="http://bsr.poznan.put.cs/model"
            targetNamespace="http://bsr.poznan.put.cs/ws" elementFormDefault="qualified">
 
-    <xs:import namespace="http://bsr.poznan.put.cs/model" schemaLocation="client.xsd"/>
+    <xs:import namespace="http://bsr.poznan.put.cs/model" schemaLocation="account.xsd"/>
 
     <!--getAccounts-->
 
@@ -18,7 +18,7 @@
     <xs:element name="getAccountsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="accounts" type="bsr:account" maxOccurs="unbounded" minOccurs="0"/>
+                <xs:element name="accounts" type="model:account" maxOccurs="unbounded" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -36,7 +36,7 @@
     <xs:element name="getAccountResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="account" type="bsr:account"/>
+                <xs:element name="account" type="model:account"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -93,14 +93,6 @@
 
     <!--COMPLEX TYPES-->
 
-    <xs:complexType name="account">
-        <xs:sequence>
-            <xs:element name="nbr" type="xs:string"/>
-            <xs:element name="amount" type="xs:double"/>
-            <xs:element name="client_id" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
-
 
     <xs:complexType name="transaction">
         <xs:sequence>
@@ -115,7 +107,7 @@
 
     <xs:complexType name="payment">
         <xs:sequence>
-            <xs:element name="nbr" type="xs:string"/>
+            <xs:element name="nrb" type="xs:string"/>
             <xs:element name="amount" type="xs:double"/>
             <xs:element name="title" type="xs:string"/>
         </xs:sequence>

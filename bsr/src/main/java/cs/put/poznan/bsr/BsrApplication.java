@@ -1,15 +1,18 @@
 package cs.put.poznan.bsr;
 
 
+import cs.put.poznan.bsr.model.Account;
 import cs.put.poznan.bsr.model.Client;
 import cs.put.poznan.bsr.repository.AccountRepository;
 import cs.put.poznan.bsr.repository.ClientRepository;
 
-import cs.put.poznan.bsr.ws.Account;
+import cs.put.poznan.bsr.utils.NrbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.math.BigDecimal;
 
 @SpringBootApplication
 public class BsrApplication implements CommandLineRunner {
@@ -18,6 +21,8 @@ public class BsrApplication implements CommandLineRunner {
     AccountRepository accountRepository;
     @Autowired
     ClientRepository clientRepository;
+    @Autowired
+    NrbService nrbService;
 
     public static void main(String[] args) {
         SpringApplication.run(BsrApplication.class, args);
@@ -28,8 +33,11 @@ public class BsrApplication implements CommandLineRunner {
     public void run(String... strings) throws Exception {
 
         Account account = new Account();
-        account.setAmount(123);
-        account.setNbr("ASDASDASD");
+        account.setAmount(BigDecimal.valueOf(123));
+
+        String genereteNbr = nrbService.genereteNbr();
+
+        account.setNrb(genereteNbr);
         account.setClientId("123");
         accountRepository.save(account);
 
