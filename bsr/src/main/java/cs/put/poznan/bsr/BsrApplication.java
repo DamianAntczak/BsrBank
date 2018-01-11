@@ -5,7 +5,6 @@ import cs.put.poznan.bsr.model.Account;
 import cs.put.poznan.bsr.model.Client;
 import cs.put.poznan.bsr.repository.AccountRepository;
 import cs.put.poznan.bsr.repository.ClientRepository;
-
 import cs.put.poznan.bsr.utils.NrbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -35,9 +34,11 @@ public class BsrApplication implements CommandLineRunner {
         Account account = new Account();
         account.setAmount(BigDecimal.valueOf(123));
 
-        String genereteNbr = nrbService.genereteNbr();
+        String generatedNrb = nrbService.generateNrb();
 
-        account.setNrb(genereteNbr);
+        System.out.println(nrbService.format(generatedNrb));
+
+        account.setNrb(generatedNrb);
         account.setClientId("123");
         accountRepository.save(account);
 
