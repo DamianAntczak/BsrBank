@@ -12,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @SpringBootApplication
 public class BsrApplication implements CommandLineRunner {
@@ -31,17 +32,22 @@ public class BsrApplication implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-        Account account = new Account();
-        account.setAmount(BigDecimal.valueOf(123));
+        List<Account> accountList = accountRepository.findAll();
 
-        String generatedNrb = nrbService.generateNrb();
+        if(accountList.isEmpty()) {
 
-        System.out.println(nrbService.format(generatedNrb));
+            Account account = new Account();
+            account.setBalance(BigDecimal.valueOf(123));
 
-        account.setNrb(generatedNrb);
-        account.setClientId("123");
-        accountRepository.save(account);
+            String generatedNrb = nrbService.generateNrb();
 
-        clientRepository.save(new Client("123", "Jan", "Nowak", "1234"));
+            System.out.println(nrbService.format(generatedNrb));
+
+            account.setNrb(generatedNrb);
+            account.setClientId("123");
+            accountRepository.save(account);
+
+            clientRepository.save(new Client("123", "Jan", "Nowak", "1234"));
+        }
     }
 }

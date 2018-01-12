@@ -6,6 +6,7 @@ import cs.put.poznan.bsr.model.Account;
 import cs.put.poznan.bsr.model.Client;
 import cs.put.poznan.bsr.repository.AccountRepository;
 import cs.put.poznan.bsr.repository.ClientRepository;
+import cs.put.poznan.bsr.utils.NrbService;
 import cs.put.poznan.bsr.ws.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -25,6 +26,9 @@ public class AccountsEndpoint {
 
     @Autowired
     ClientRepository clientRepository;
+
+    @Autowired
+    NrbService nrbService;
 
     private static final String NAMESPACE_URI = "http://bsr.poznan.put.cs/ws";
 
@@ -56,12 +60,15 @@ public class AccountsEndpoint {
     public AddPaymentResponse addPayment(@RequestPayload AddPaymentRequest addPaymentRequest){
 
         Payment payment = addPaymentRequest.getPayment();
-        
+
+        if(nrbService.validateNrb(payment.getNrb()))
+            throw new IllegalArgumentException("bad nrb");
+
         Account accountByNbr = accountRepository.findAccountByNrb(payment.getNrb());
         
         if(payment.getAmount() > 0){
-            BigDecimal amount = accountByNbr.getAmount().subtract(BigDecimal.valueOf(payment.getAmount()));
-            accountByNbr.setAmount(amount);
+            BigDecimal amount = accountByNbr.getBalance().subtract(BigDecimal.valueOf(payment.getAmount()));
+            accountByNbr.setBalance(amount);
             accountRepository.save(accountByNbr);
         }
 

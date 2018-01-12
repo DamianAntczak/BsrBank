@@ -24,7 +24,7 @@ public class Account {
 
     @Getter
     @Setter
-    private BigDecimal amount;
+    private BigDecimal balance;
 
     @Getter
     @Setter

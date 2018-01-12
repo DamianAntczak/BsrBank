@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="nrb" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="balance" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -74,7 +74,7 @@ public class Payment {
     }
 
     /**
-     * Gets the value of the amount property.
+     * Gets the value of the balance property.
      * 
      */
     public double getAmount() {
@@ -82,7 +82,7 @@ public class Payment {
     }
 
     /**
-     * Sets the value of the amount property.
+     * Sets the value of the balance property.
      * 
      */
     public void setAmount(double value) {
