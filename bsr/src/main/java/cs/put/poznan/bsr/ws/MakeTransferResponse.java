@@ -25,7 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="client_id" type="{http://bsr.poznan.put.cs/ws}payment"/>
+ *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="massage" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +37,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "clientId"
+    "status",
+    "massage"
 })
-@XmlRootElement(name = "getPaymentRequest")
-public class GetPaymentRequest {
+@XmlRootElement(name = "makeTransferResponse")
+public class MakeTransferResponse {
 
-    @XmlElement(name = "client_id", required = true)
-    protected Payment clientId;
+    @XmlElement(required = true)
+    protected String status;
+    @XmlElement(required = true)
+    protected String massage;
 
     /**
-     * Gets the value of the clientId property.
+     * Gets the value of the status property.
      * 
      * @return
      *     possible object is
-     *     {@link Payment }
+     *     {@link String }
      *     
      */
-    public Payment getClientId() {
-        return clientId;
+    public String getStatus() {
+        return status;
     }
 
     /**
-     * Sets the value of the clientId property.
+     * Sets the value of the status property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Payment }
+     *     {@link String }
      *     
      */
-    public void setClientId(Payment value) {
-        this.clientId = value;
+    public void setStatus(String value) {
+        this.status = value;
+    }
+
+    /**
+     * Gets the value of the massage property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMassage() {
+        return massage;
+    }
+
+    /**
+     * Sets the value of the massage property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMassage(String value) {
+        this.massage = value;
     }
 
 }

@@ -14,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class History extends Transfer {
+    public enum Destination{ INCOME, OUTFLOW};
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date timestamp;
@@ -23,6 +24,8 @@ public class History extends Transfer {
     private BigDecimal balanceBefore;
 
     private BigDecimal balanceAfter;
+
+    private Destination destination;
 
     public void setTransfer(Transfer transfer) {
         this.source_account = transfer.source_account;

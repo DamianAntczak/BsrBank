@@ -90,10 +90,44 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    
+    <!--TRANSACTIONS-->
+    
+    <xs:element name="getTransactionsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nrb" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getTransactionsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transactions" type="model:history" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="makeTransferRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="destination_account" type="xs:string"/>
+                <xs:element name="transfer" type="model:transfer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="makeTransferResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:string"/>
+                <xs:element name="massage" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <!--COMPLEX TYPES-->
-
-
     <xs:complexType name="transaction">
         <xs:sequence>
             <xs:element name="amount" type="xs:double"/>

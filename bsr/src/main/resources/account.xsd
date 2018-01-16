@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema version="1.0" targetNamespace="http://bsr.poznan.put.cs/model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema version="1.0" targetNamespace="http://bsr.poznan.put.cs/model" xmlns:model="http://bsr.poznan.put.cs/model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
   <xs:complexType name="account">
     <xs:sequence>
@@ -16,6 +16,29 @@
       <xs:element name="password" type="xs:string" minOccurs="0"/>
       <xs:element name="surname" type="xs:string" minOccurs="0"/>
     </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="transfer">
+    <xs:sequence>
+      <xs:element name="amount" type="xs:int"/>
+      <xs:element name="destination_name" type="xs:string" minOccurs="0"/>
+      <xs:element name="source_account" type="xs:string" minOccurs="0"/>
+      <xs:element name="source_name" type="xs:string" minOccurs="0"/>
+      <xs:element name="title" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="history">
+    <xs:complexContent>
+      <xs:extension base="model:transfer">
+        <xs:sequence>
+          <xs:element name="balanceAfter" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="balanceBefore" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="nrb" type="xs:string" minOccurs="0"/>
+          <xs:element name="timestamp" type="xs:dateTime" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 </xs:schema>
 

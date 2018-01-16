@@ -2,13 +2,21 @@ package cs.put.poznan.bsr.endpoints;
 
 
 
+import cs.put.poznan.bsr.model.*;
 import cs.put.poznan.bsr.model.Account;
 import cs.put.poznan.bsr.model.Client;
+import cs.put.poznan.bsr.model.History;
 import cs.put.poznan.bsr.repository.AccountRepository;
 import cs.put.poznan.bsr.repository.ClientRepository;
+import cs.put.poznan.bsr.repository.HistoryRepository;
+import cs.put.poznan.bsr.service.TransferService;
 import cs.put.poznan.bsr.utils.NrbService;
 import cs.put.poznan.bsr.ws.*;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -22,13 +30,25 @@ import java.util.List;
 public class AccountsEndpoint {
 
     @Autowired
-    AccountRepository accountRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
 
     @Autowired
-    NrbService nrbService;
+    private HistoryRepository historyRepository;
+
+    @Autowired
+    private NrbService nrbService;
+
+    @Autowired
+    private TransferService transferService;
+
+    @Value( "${transfer.user.name}" )
+    private String username;
+
+    @Value( "${transfer.user.password}" )
+    private String password;
 
     private static final String NAMESPACE_URI = "http://bsr.poznan.put.cs/ws";
 
@@ -87,5 +107,47 @@ public class AccountsEndpoint {
         getClientResponse.setClient(clientById);
 
         return getClientResponse;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getTransactionsRequest")
+    @ResponsePayload
+    public GetTransactionsResponse getTransactionsRequest(@RequestPayload GetTransactionsRequest getTransactionsRequest){
+
+        GetTransactionsResponse getTransactionsResponse = new GetTransactionsResponse();
+        List<History> allByNrb = getTransactionsResponse.getTransactions();
+        allByNrb.addAll(historyRepository.findAllByNrb(getTransactionsRequest.getNrb()));
+        return getTransactionsResponse;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "makeTransferRequest")
+    @ResponsePayload
+    public MakeTransferResponse makeTransferRequest(@RequestPayload MakeTransferRequest makeTransferRequest){
+
+        Transfer transfer = makeTransferRequest.getTransfer();
+        String destinationAccount = makeTransferRequest.getDestinationAccount().replace("\\s+","");
+
+        if(!nrbService.validateNrb(transfer.getSource_account()))
+            throw new IllegalArgumentException("source_account");
+
+        if(!nrbService.validateNrb(transfer.getSource_account()))
+            throw new IllegalArgumentException("destination_account");
+
+        if(transfer.getTitle().isEmpty())
+            throw new IllegalArgumentException("empty title");
+
+        if(!nrbService.validateNrb(destinationAccount))
+            throw new IllegalArgumentException("wrong destinationAccount");
+
+        MakeTransferResponse makeTransferResponse = new MakeTransferResponse();
+
+        if(transferService.makeTransfer(destinationAccount, transfer)) {
+            makeTransferResponse.setStatus("S");
+            makeTransferResponse.setMassage("ok");
+        }
+        else{
+            makeTransferResponse.setStatus("E");
+            makeTransferResponse.setMassage("ok");
+        }
+        return makeTransferResponse;
     }
 }

@@ -17,6 +17,7 @@ import java.util.Date;
 @RestController
 public class AccountController {
 
+    public static final int MAX_FILD_LENTGH = 1024;
     @Autowired
     private NrbService nrbService;
 
@@ -29,7 +30,7 @@ public class AccountController {
     @RequestMapping(path = "/accounts/{nrb}/history", method = RequestMethod.POST)
     public ResponseEntity get(@PathVariable String nrb, @RequestBody Transfer transfer) {
 
-        if (!nrbService.validateNrb(nrb)) {
+        if (nrb == null || !nrbService.validateNrb(nrb)) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
             Account accountByNrb = accountRepository.findAccountByNrb(nrb);
@@ -37,10 +38,11 @@ public class AccountController {
             if (accountByNrb == null)
                 return new ResponseEntity(HttpStatus.NOT_FOUND);
 
-            if (transfer == null)
-                return new ResponseEntity("error", HttpStatus.BAD_REQUEST);
+            if (!validateTransfer(transfer))
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
             History history = History.builder()
+                    .destination(History.Destination.INCOME)
                     .balanceAfter(accountByNrb.getBalance())
                     .nrb(nrb)
                     .timestamp(new Date())
@@ -56,5 +58,28 @@ public class AccountController {
 
             return new ResponseEntity(HttpStatus.CREATED);
         }
+    }
+
+    private boolean validateTransfer(Transfer transfer){
+
+        if(transfer == null)
+            return false;
+
+        if(transfer.getAmount() <= 0 || transfer.getAmount() > 1000000000)
+            return  false;
+
+        if(transfer.getSource_account() == null || !nrbService.validateNrb(transfer.getSource_account()))
+            return false;
+
+        if (transfer.getTitle().isEmpty() || transfer.getTitle().length() > MAX_FILD_LENTGH)
+            return false;
+
+        if(transfer.getSource_name().length() > MAX_FILD_LENTGH)
+            return false;
+
+        if(transfer.getDestination_name().isEmpty() || transfer.getDestination_name().length() >= MAX_FILD_LENTGH)
+            return false;
+
+        return true;
     }
 }

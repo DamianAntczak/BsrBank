@@ -8,7 +8,7 @@
 
 package cs.put.poznan.bsr.ws;
 
-import cs.put.poznan.bsr.model.Account;
+import cs.put.poznan.bsr.model.Transfer;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -27,7 +27,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="account" type="{http://bsr.poznan.put.cs/model}account"/>
+ *         &lt;element name="destination_account" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="transfer" type="{http://bsr.poznan.put.cs/model}transfer"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,36 +39,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "account"
+    "destinationAccount",
+    "transfer"
 })
-@XmlRootElement(name = "getAccountResponse")
-public class GetAccountResponse {
+@XmlRootElement(name = "makeTransferRequest")
+public class MakeTransferRequest {
 
+    @XmlElement(name = "destination_account", required = true)
+    protected String destinationAccount;
     @XmlElement(required = true)
-    protected Account account;
+    protected Transfer transfer;
 
     /**
-     * Gets the value of the account property.
+     * Gets the value of the destinationAccount property.
      * 
      * @return
      *     possible object is
-     *     {@link Account }
+     *     {@link String }
      *     
      */
-    public Account getAccount() {
-        return account;
+    public String getDestinationAccount() {
+        return destinationAccount;
     }
 
     /**
-     * Sets the value of the account property.
+     * Sets the value of the destinationAccount property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Account }
+     *     {@link String }
      *     
      */
-    public void setAccount(Account value) {
-        this.account = value;
+    public void setDestinationAccount(String value) {
+        this.destinationAccount = value;
+    }
+
+    /**
+     * Gets the value of the transfer property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Transfer }
+     *     
+     */
+    public Transfer getTransfer() {
+        return transfer;
+    }
+
+    /**
+     * Sets the value of the transfer property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Transfer }
+     *     
+     */
+    public void setTransfer(Transfer value) {
+        this.transfer = value;
     }
 
 }

@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="client_id" type="{http://bsr.poznan.put.cs/ws}payment"/>
+ *         &lt;element name="nrb" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "clientId"
+    "nrb"
 })
-@XmlRootElement(name = "getPaymentRequest")
-public class GetPaymentRequest {
+@XmlRootElement(name = "getTransactionsRequest")
+public class GetTransactionsRequest {
 
-    @XmlElement(name = "client_id", required = true)
-    protected Payment clientId;
+    @XmlElement(required = true)
+    protected String nrb;
 
     /**
-     * Gets the value of the clientId property.
+     * Gets the value of the nrb property.
      * 
      * @return
      *     possible object is
-     *     {@link Payment }
+     *     {@link String }
      *     
      */
-    public Payment getClientId() {
-        return clientId;
+    public String getNrb() {
+        return nrb;
     }
 
     /**
-     * Sets the value of the clientId property.
+     * Sets the value of the nrb property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Payment }
+     *     {@link String }
      *     
      */
-    public void setClientId(Payment value) {
-        this.clientId = value;
+    public void setNrb(String value) {
+        this.nrb = value;
     }
 
 }
