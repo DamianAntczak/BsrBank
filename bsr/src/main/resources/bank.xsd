@@ -42,15 +42,15 @@
     </xs:element>
 
     <!--PAYMENT-->
-    <xs:element name="getPaymentRequest">
+    <xs:element name="addWithdrawalRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="client_id" type="bsr:payment"/>
+                <xs:element name="payment" type="bsr:payment"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="getPaymentResponse">
+    <xs:element name="addWithdrawalResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="message" type="xs:string"/>
@@ -127,6 +127,22 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="loginRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="authoryzation" type="bsr:authoryzation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="loginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <!--COMPLEX TYPES-->
     <xs:complexType name="transaction">
         <xs:sequence>
@@ -147,5 +163,11 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:complexType name="authoryzation">
+        <xs:sequence>
+            <xs:element name="client_id"/>
+            <xs:element name="password"/>
+        </xs:sequence>
+    </xs:complexType>
 
 </xs:schema>

@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class History extends Transfer {
-    public enum Destination{ INCOME, OUTFLOW};
+    public enum Destination{ INCOME, OUTFLOW, PAYMENT, WITHDRAWAL}
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date timestamp;

@@ -64,6 +64,12 @@ public class TransferService {
 
 
     public boolean makeTransfer(String destinationAccount, Transfer transfer) {
+
+        if(!nrbService.validateNrb(destinationAccount))
+            return false;
+        if(bankCodeToEndpointMap.get(nrbService.getBankCodeFromNrb(destinationAccount)) == null)
+            return false;
+
         String uri = createUrl(destinationAccount);
 
         Account accountByNrb = accountRepository.findAccountByNrb(transfer.getSource_account());

@@ -23,6 +23,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 
@@ -81,20 +82,75 @@ public class AccountsEndpoint {
 
         Payment payment = addPaymentRequest.getPayment();
 
-        if(nrbService.validateNrb(payment.getNrb()))
+        if(!nrbService.validateNrb(payment.getNrb()))
             throw new IllegalArgumentException("bad nrb");
 
         Account accountByNbr = accountRepository.findAccountByNrb(payment.getNrb());
         
         if(payment.getAmount() > 0){
-            BigDecimal amount = accountByNbr.getBalance().subtract(BigDecimal.valueOf(payment.getAmount()));
+            History history = History.builder().timestamp(new Date())
+                    .nrb(payment.getNrb())
+                    .balanceBefore(accountByNbr.getBalance())
+                    .destination(History.Destination.PAYMENT)
+                    .build();
+
+            BigDecimal amount = accountByNbr.getBalance().add(BigDecimal.valueOf(payment.getAmount()));
             accountByNbr.setBalance(amount);
             accountRepository.save(accountByNbr);
+
+            history.setBalanceAfter(amount);
+
+            Transfer transfer = getTransfer(payment, accountByNbr, amount);
+            history.setTransfer(transfer);
+            historyRepository.save(history);
         }
 
         AddPaymentResponse addPaymentResponse = new AddPaymentResponse();
         addPaymentResponse.setMassage("OK");
         return addPaymentResponse;
+    }
+
+    private Transfer getTransfer(Payment payment, Account accountByNbr, BigDecimal amount) {
+        Client clientById = clientRepository.getClientById(accountByNbr.getClientId());
+        Transfer transfer = new Transfer();
+        transfer.setTitle(payment.getTitle());
+        transfer.setDestination_name(clientById.getName());
+        transfer.setSource_account(clientById.getId());
+        transfer.setAmount((int)amount.doubleValue()*100);
+        return transfer;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "addWithdrawalRequest")
+    @ResponsePayload
+    public AddWithdrawalResponse addWithdrawal(@RequestPayload  AddWithdrawalRequest addWithdrawalRequest){
+        Payment payment = addWithdrawalRequest.getPayment();
+
+        if(!nrbService.validateNrb(payment.getNrb()))
+            throw new IllegalArgumentException("bad nrb");
+
+        Account accountByNbr = accountRepository.findAccountByNrb(payment.getNrb());
+
+        if(payment.getAmount() > 0){
+            History history = History.builder().timestamp(new Date())
+                    .nrb(payment.getNrb())
+                    .balanceBefore(accountByNbr.getBalance())
+                    .destination(History.Destination.WITHDRAWAL)
+                    .build();
+
+            BigDecimal amount = accountByNbr.getBalance().subtract(BigDecimal.valueOf(payment.getAmount()));
+            accountByNbr.setBalance(amount);
+            accountRepository.save(accountByNbr);
+
+            history.setBalanceAfter(amount);
+
+            Transfer transfer = getTransfer(payment, accountByNbr, amount);
+            history.setTransfer(transfer);
+            historyRepository.save(history);
+        }
+
+        AddWithdrawalResponse addWithdrawalResponse = new AddWithdrawalResponse();
+        addWithdrawalResponse.setMessage("OK");
+        return addWithdrawalResponse;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getClientRequest")

@@ -11,21 +11,21 @@ package cs.put.poznan.bsr.ws;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for authoryzation complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
+ * &lt;complexType name="authoryzation">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="client_id" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="client_id" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
+ *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,24 +35,26 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "clientId"
+@XmlType(name = "authoryzation", propOrder = {
+    "clientId",
+    "password"
 })
-@XmlRootElement(name = "getClientRequest")
-public class GetClientRequest {
+public class Authoryzation {
 
     @XmlElement(name = "client_id", required = true)
-    protected String clientId;
+    protected Object clientId;
+    @XmlElement(required = true)
+    protected Object password;
 
     /**
      * Gets the value of the clientId property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Object }
      *     
      */
-    public String getClientId() {
+    public Object getClientId() {
         return clientId;
     }
 
@@ -61,11 +63,35 @@ public class GetClientRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Object }
      *     
      */
-    public void setClientId(String value) {
+    public void setClientId(Object value) {
         this.clientId = value;
+    }
+
+    /**
+     * Gets the value of the password property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Object }
+     *     
+     */
+    public Object getPassword() {
+        return password;
+    }
+
+    /**
+     * Sets the value of the password property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Object }
+     *     
+     */
+    public void setPassword(Object value) {
+        this.password = value;
     }
 
 }
