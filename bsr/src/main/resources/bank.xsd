@@ -165,8 +165,14 @@
 
     <xs:complexType name="authoryzation">
         <xs:sequence>
-            <xs:element name="client_id"/>
-            <xs:element name="password"/>
+            <xs:element name="client_id" type="xs:string"/>
+            <xs:element name="password" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="token">
+        <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
 

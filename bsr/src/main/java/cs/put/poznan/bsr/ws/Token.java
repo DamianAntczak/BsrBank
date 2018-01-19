@@ -8,26 +8,23 @@
 
 package cs.put.poznan.bsr.ws;
 
-import cs.put.poznan.bsr.model.Client;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for token complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
+ * &lt;complexType name="token">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="client" type="{http://bsr.poznan.put.cs/model}client"/>
+ *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,37 +34,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "client"
+@XmlType(name = "token", propOrder = {
+    "token"
 })
-@XmlRootElement(name = "getClientResponse")
-public class GetClientResponse {
+public class Token {
 
     @XmlElement(required = true)
-    protected Client client;
+    protected String token;
 
     /**
-     * Gets the value of the client property.
+     * Gets the value of the token property.
      * 
      * @return
      *     possible object is
-     *     {@link Client }
+     *     {@link String }
      *     
      */
-    public Client getClient() {
-        return client;
+    public String getToken() {
+        return token;
     }
 
     /**
-     * Sets the value of the client property.
+     * Sets the value of the token property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Client }
+     *     {@link String }
      *     
      */
-    public void setClient(Client value) {
-        this.client = value;
+    public void setToken(String value) {
+        this.token = value;
     }
 
 }

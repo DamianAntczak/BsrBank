@@ -49,5 +49,13 @@ public class BsrApplication implements CommandLineRunner {
 
             clientRepository.save(new Client("123", "Jan", "Nowak", "1234"));
         }
+        else if(accountList.size() == 1){
+            Account account = new Account();
+            account.setBalance(BigDecimal.valueOf(100));
+            String generatedNrb = nrbService.generateNrb();
+            account.setNrb(generatedNrb);
+            account.setClientId("123");
+            accountRepository.save(account);
+        }
     }
 }

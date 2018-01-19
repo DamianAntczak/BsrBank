@@ -4,7 +4,7 @@
   <xs:complexType name="account">
     <xs:sequence>
       <xs:element name="nrb" type="xs:string" minOccurs="0"/>
-      <xs:element name="amount" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="balance" type="xs:decimal" minOccurs="0"/>
       <xs:element name="clientId" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
