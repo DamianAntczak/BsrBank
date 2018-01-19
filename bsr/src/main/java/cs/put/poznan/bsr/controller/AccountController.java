@@ -43,7 +43,7 @@ public class AccountController {
 
             History history = History.builder()
                     .destination(History.Destination.INCOME)
-                    .balanceAfter(accountByNrb.getBalance())
+                    .balanceBefore(accountByNrb.getBalance())
                     .nrb(nrb)
                     .timestamp(new Date())
                     .build();
@@ -52,7 +52,7 @@ public class AccountController {
             accountByNrb.setBalance(newBalance);
             accountRepository.save(accountByNrb);
 
-            history.setBalanceBefore(accountByNrb.getBalance());
+            history.setBalanceAfter(accountByNrb.getBalance());
             history.setTransfer(transfer);
             historyRepository.save(history);
 

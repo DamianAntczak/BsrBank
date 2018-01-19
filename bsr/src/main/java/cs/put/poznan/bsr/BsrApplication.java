@@ -37,25 +37,24 @@ public class BsrApplication implements CommandLineRunner {
         if(accountList.isEmpty()) {
 
             Account account = new Account();
-            account.setBalance(BigDecimal.valueOf(123));
+            account.setBalance(BigDecimal.valueOf(0));
 
             String generatedNrb = nrbService.generateNrb();
 
             System.out.println(nrbService.format(generatedNrb));
 
             account.setNrb(generatedNrb);
-            account.setClientId("123");
+            account.setClientId("BSR");
             accountRepository.save(account);
 
-            clientRepository.save(new Client("123", "Jan", "Nowak", "1234"));
-        }
-        else if(accountList.size() == 1){
-            Account account = new Account();
-            account.setBalance(BigDecimal.valueOf(100));
-            String generatedNrb = nrbService.generateNrb();
-            account.setNrb(generatedNrb);
-            account.setClientId("123");
-            accountRepository.save(account);
+            clientRepository.save(new Client("BSR", "Jan", "Nowak", "bsr1"));
+
+            Account accountB = new Account();
+            accountB.setBalance(BigDecimal.valueOf(0));
+            String generatedNrbB = nrbService.generateNrb();
+            accountB.setNrb(generatedNrbB);
+            accountB.setClientId("BSR");
+            accountRepository.save(accountB);
         }
     }
 }

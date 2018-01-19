@@ -36,10 +36,10 @@ public class TransferService {
     @Autowired
     NrbService nrbService;
 
-    @Value("${transfer.user.name}")
+    @Value("${send.user.name}")
     private String username;
 
-    @Value("${transfer.user.password}")
+    @Value("${send.user.password}")
     private String password;
 
     private Map<String, String> bankCodeToEndpointMap;
@@ -80,6 +80,9 @@ public class TransferService {
                 RestTemplate restTemplate = new RestTemplate();
                 HttpEntity entity = new HttpEntity(transfer, getHeaders());
                 ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
+
+                if(response.getStatusCode().equals(HttpStatus.UNAUTHORIZED))
+                    return false;
 
                 if (response.getStatusCode().equals(HttpStatus.CREATED)) {
 

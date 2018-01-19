@@ -123,7 +123,7 @@ public class AccountsEndpoint {
         transfer.setTitle(payment.getTitle());
         transfer.setDestination_name(clientById.getName());
         transfer.setSource_account(clientById.getId());
-        transfer.setAmount((int) amount.doubleValue() * 100);
+        transfer.setAmount((int) (amount.doubleValue() * 100));
         return transfer;
     }
 
